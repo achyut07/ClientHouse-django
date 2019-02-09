@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Gallery{% endblock %}
+{% block content %}
+
+<div class="container gallery" style="margin-bottom: 50px;">
+  <div class="row">
+    <h2 style="color: indigo; padding-left: 2rem;">welcome to gallery ! </h2>
+  </div>
+  <div class="row">
+    {% if company_pics %}
+    {% for pics in company_pics %}
+    <div class="col-lg-3 d-flex align-items-stretch">
+      <div class="card" style="width:400px; background-color: rgb(212, 188, 240);">
+        <a target="_blank" href="{{pics.company_logo.url}}">
+          <img class="card-img-top" height="250px" src="{{pics.company_logo.url}}" alt="img error">
+          <div class="card-body" style="text-align: center;">
+            <h4 class="card-title text-center">Company: {{pics.client_company}}</h4>
+          </div>
+      </div>
+    </div>
+    {% if forloop.counter|divisibleby:"4" %}
+  </div>
+  <br><br>
+  <div class="row">
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div>
+    <p> No companies images available !! </p>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

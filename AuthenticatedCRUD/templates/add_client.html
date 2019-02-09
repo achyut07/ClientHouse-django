@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Client{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" style="margin-bottom: 300px;">
+  <div class="row">
+    <div class="col-6">
+      <h2>Add Client</h2>
+      <hr>
+      <form action="/create">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-success" type="submit" value="Add">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

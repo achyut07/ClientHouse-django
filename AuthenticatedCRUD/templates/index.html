@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <div class="container" style="margin-bottom: 20px;">
+    <div class="row text-aligned-center">
+      {% if client_info %}
+      {% for client in client_info %}
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card" style="width:400px; background-color: rgb(212, 188, 240);">
+          {% if client.company_logo %}
+          <img class="card-img-top" height="250px" src="{{client.company_logo.url}}" alt="Card image">
+          {% else %}
+          <img class="img-circle" height="250px" src="media/pic_folder/no-image.png" alt="Card image">
+          {% endif %}
+
+          <div class="card-body" style="text-align: center;">
+            <h4 class="card-title text-center">Name: {{client.client_name}}</h4>
+            <p class="card-text text-center"><strong>Company: </strong>{{client.client_company}}</p>
+            <p class="card-text text-center"><strong>Location: </strong>{{client.company_location}}</p>
+            <p class="card-text text-center"><strong>Contactno: </strong>{{client.contactno}}</p>
+            <p class="card-text text-center"><strong>Project: </strong>{{client.project_name}}</p>
+            <p class="card-text text-center"><strong>Tools: </strong>{{client.tools}}</p>
+            <p class="card-text text-center"><strong>Offer-Date:</strong>{{client.offer_date}}</p>
+            <p class="card-text text-center"><strong>Deadline: </strong>{{client.deadline}}</p>
+            {% if user.is_staff %}
+            <a href="/edit/{{ client.id }}" class="btn btn-primary">Edit</a>
+            <a href="/delete/{{ client.id }}" class="btn btn-primary" style="background-color:rgb(248, 19, 115); border-color:red;">Delete</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:"3" %}
+    </div>
+    <br><br>
+    <div class="row">
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <!--</div>-->
+    {% else %}
+    <div class="container">
+      <p>
+        <center><b><i>Sorry! No results found.</i></b></center>
+      </p>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if client_info.has_other_pages %}
+  <div class="paginatio-content">
+  <ul class="pagination" style="padding: 10px; margin: 0px auto 100px 800px;">
+    {% if client_info.has_previous %}
+      <li><a href="?page={{ client_info.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in client_info.paginator.page_range %}
+      {% if client_info.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if client_info.has_next %}
+      <li><a href="?page={{ client_info.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock %}

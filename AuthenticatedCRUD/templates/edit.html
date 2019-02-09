@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Client {% endblock %}
+{% block content %}
+
+<div class="container" style="margin-bottom: 300px;">
+  <div class="row">
+    <div class="col-6">
+
+      <h2>Update Client</h2>
+      <hr>
+      <br><br>
+      <form action="/update/ {{ clients.id }}">
+        {% csrf_token %}
+        <label class=" form-group" for="client_name">Name: </label>
+        <input class="form-control" type="text" name="client_name" value="{{ clients.client_name}}" placeholder="{{ clients.client_name}}">
+
+        <label class="form-group" for="client_company">Company: </label>
+        <input class="form-control" type="text" name="client_company" value="{{ clients.client_company }}" placeholder="{{ clients.client_company  }}">
+
+        <label class="form-group" for="company_location">Location </label>
+        <input class="form-control" type="text" name="company_location" value="{{ clients.company_location }}" placeholder="{{ clients.company_location  }}">
+
+        <label class="form-group" for="company_logo">Logo </label>
+        <input class="form-control" type="file" name="company_logo" value="{{ clients.company_logo }}" accept="image/* ">
+
+        <label class="form-group" for="contactno">Contactno </label>
+        <input class="form-control" type="text" name="contactno" value="{{ clients.contactno }}" placeholder="{{ clients.contactno  }}">
+
+        <label class="form-group" for="prject_name">Project </label>
+        <input class="form-control" type="text" name="project_name" value="{{ clients.project_name }}" placeholder="{{ clients.project_name }}">
+
+        <label class="form-group" for="tools">Tools </label>
+        <input class="form-control" type="text" name="tools" value="{{ clients.tools }}" placeholder="{{ clients.tools }}">
+
+        <label class="form-group" for="offer_date">Offer Date </label>
+        <input class="form-control" type="text" name="offer_date" value="{{ clients.offer_date }}" placeholder="{{ clients.offer_date  }}">
+
+        <label class="form-group" for="deadline">Deadline </label>
+        <input class="form-control" type="text" name="deadline" value="{{ clients.deadline }}" placeholder="{{ clients.deadline }}">
+        <br>
+        <input class="btn btn-primary" type="submit" value="Update">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

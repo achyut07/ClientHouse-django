@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} ClientHouse {% endblock %}</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+  <!--link to static files-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+  <div class="header" style="background-color: indigo;">
+    <div class="container">
+      <span style="font-size:40px; color: white;"><strong>ClientHouse</strong>
+        <div class="header-right">
+          {% url 'crud:index' as index_view %}
+          {% if user.is_staff and request.path == index_view %}
+          <a class="active" href="/add_client" style="margin-right:10px;">Add Client</a>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+          <a href="/logout_user" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+          </a>
+          {% else %}
+
+          <a href="/signup" class="btn btn-info btn-lg" style="margin-right:10px;">
+            <span class="fa fa-user-o"></span> Sign up
+          </a>
+          <a href="/login_user" class="btn btn-info btn-lg">
+            <span class="fa fa-sign-in"></span> Log in
+          </a>
+          {% endif %}
+        </div>
+    </div>
+  </div>
+
+  <div class="header" id="myHeader"  style="margin-bottom:100px;">
+    <div class="container menubar">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="menu">
+            <a href="{% url 'crud:index' %}">Home</a>
+            <a href="{% url 'crud:gallery' %}">Gallery</a>
+            <a href="{% url 'crud:search' %}">Search</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <div class="footer" style=" position: fixed; left: 0; bottom: 0; width: 100%; background-color:black; color: white; text-align: center; font-size:10px;">
+    <p>Copyright &copy;<script type="text/javascript">
+        document.write(new Date().getFullYear());
+      </script> All rights reserved | this Websites is made by Achyut.@prabidhilabs</p>
+  </div>
+
+  <!-- source to sticky-heder.js -->
+  <!-- <script src="{% static 'js/sticky-header.js' %}"> -->
+  </script>
+
+</body>
+
+</html>

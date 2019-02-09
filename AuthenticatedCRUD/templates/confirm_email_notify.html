@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Email Sent {% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row" style="margin-bottom: 200px 0px 800px 500px;">
+      <p class="text-success" style="font-size: 16px; margin-top:100px;">Thanks for registration. confirmation link is sent to your email address, please verify from your email address to login automatically. <a href="{% url 'crud:signup' %}">Back</a></p>
+    </div>
+  </div>
+{% endblock %}
